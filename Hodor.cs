@@ -28,7 +28,7 @@ namespace Hodor
                 MessageBox.Show("webDav_go已经运行,请先停止再启动");
                 Environment.Exit(0);
             }
-            exep.StartInfo.Arguments = "-port 5081 -log true";
+            exep.StartInfo.Arguments = "-port 5081 -user \"admin\" -pass \"123\"";
             exep.StartInfo.FileName = DavFile;
             exep.StartInfo.CreateNoWindow = true;
             exep.Start();

@@ -229,7 +229,7 @@ namespace Hodor
                 linkLabel1.LinkVisited = true;
                 using var process = new Process();
                 process.StartInfo.UseShellExecute = true;
-                process.StartInfo.FileName = "https://ser163.cn";
+                process.StartInfo.FileName = "https://ser163.cn/doc";
                 process.Start();
             }
             catch (Exception ex)
