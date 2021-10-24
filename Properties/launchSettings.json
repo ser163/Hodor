@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Hodor": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
