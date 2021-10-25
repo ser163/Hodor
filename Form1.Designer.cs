@@ -38,6 +38,8 @@ namespace Hodor
             this.reSever = new System.Windows.Forms.ToolStripMenuItem();
             this.toolExit = new System.Windows.Forms.ToolStripMenuItem();
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.browseDir = new System.Windows.Forms.Button();
+            this.dirPathBox = new System.Windows.Forms.TextBox();
             this.txServerPass = new System.Windows.Forms.TextBox();
             this.cbServer = new System.Windows.Forms.CheckBox();
             this.pbStatusBox = new System.Windows.Forms.PictureBox();
@@ -58,6 +60,7 @@ namespace Hodor
             this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.GBIP = new System.Windows.Forms.GroupBox();
             this.cbIpList = new System.Windows.Forms.ComboBox();
+            this.folderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.cxMenuStrip.SuspendLayout();
             this.gb1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatusBox)).BeginInit();
@@ -117,6 +120,8 @@ namespace Hodor
             // 
             // gb1
             // 
+            this.gb1.Controls.Add(this.browseDir);
+            this.gb1.Controls.Add(this.dirPathBox);
             this.gb1.Controls.Add(this.txServerPass);
             this.gb1.Controls.Add(this.cbServer);
             this.gb1.Controls.Add(this.pbStatusBox);
@@ -125,24 +130,44 @@ namespace Hodor
             this.gb1.Controls.Add(this.butStart);
             this.gb1.Location = new System.Drawing.Point(8, 12);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(247, 190);
+            this.gb1.Size = new System.Drawing.Size(247, 233);
             this.gb1.TabIndex = 1;
             this.gb1.TabStop = false;
             this.gb1.Text = "本机共享";
             this.gb1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // browseDir
+            // 
+            this.browseDir.Image = global::Hodor.Properties.Resources.dir;
+            this.browseDir.Location = new System.Drawing.Point(206, 150);
+            this.browseDir.Name = "browseDir";
+            this.browseDir.Size = new System.Drawing.Size(28, 23);
+            this.browseDir.TabIndex = 7;
+            this.browseDir.UseVisualStyleBackColor = true;
+            this.browseDir.Click += new System.EventHandler(this.browseDir_Click);
+            // 
+            // dirPathBox
+            // 
+            this.dirPathBox.Location = new System.Drawing.Point(15, 150);
+            this.dirPathBox.Name = "dirPathBox";
+            this.dirPathBox.PlaceholderText = "请选择共享文件夹";
+            this.dirPathBox.Size = new System.Drawing.Size(185, 23);
+            this.dirPathBox.TabIndex = 6;
+            this.dirPathBox.TextChanged += new System.EventHandler(this.dirPathBox_TextChanged);
+            // 
             // txServerPass
             // 
-            this.txServerPass.Location = new System.Drawing.Point(129, 158);
+            this.txServerPass.Location = new System.Drawing.Point(129, 191);
             this.txServerPass.Name = "txServerPass";
             this.txServerPass.PasswordChar = '*';
             this.txServerPass.Size = new System.Drawing.Size(105, 23);
             this.txServerPass.TabIndex = 5;
+            this.txServerPass.UseSystemPasswordChar = true;
             // 
             // cbServer
             // 
             this.cbServer.AutoSize = true;
-            this.cbServer.Location = new System.Drawing.Point(15, 158);
+            this.cbServer.Location = new System.Drawing.Point(15, 191);
             this.cbServer.Name = "cbServer";
             this.cbServer.Size = new System.Drawing.Size(99, 21);
             this.cbServer.TabIndex = 4;
@@ -153,7 +178,7 @@ namespace Hodor
             // 
             this.pbStatusBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbStatusBox.Image = global::Hodor.Properties.Resources.stop_64;
-            this.pbStatusBox.Location = new System.Drawing.Point(129, 37);
+            this.pbStatusBox.Location = new System.Drawing.Point(129, 27);
             this.pbStatusBox.Name = "pbStatusBox";
             this.pbStatusBox.Size = new System.Drawing.Size(105, 105);
             this.pbStatusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -162,7 +187,7 @@ namespace Hodor
             // 
             // butStop
             // 
-            this.butStop.Location = new System.Drawing.Point(15, 119);
+            this.butStop.Location = new System.Drawing.Point(15, 109);
             this.butStop.Name = "butStop";
             this.butStop.Size = new System.Drawing.Size(92, 23);
             this.butStop.TabIndex = 2;
@@ -172,7 +197,7 @@ namespace Hodor
             // 
             // butReStart
             // 
-            this.butReStart.Location = new System.Drawing.Point(15, 77);
+            this.butReStart.Location = new System.Drawing.Point(15, 68);
             this.butReStart.Name = "butReStart";
             this.butReStart.Size = new System.Drawing.Size(92, 23);
             this.butReStart.TabIndex = 1;
@@ -182,7 +207,7 @@ namespace Hodor
             // 
             // butStart
             // 
-            this.butStart.Location = new System.Drawing.Point(15, 37);
+            this.butStart.Location = new System.Drawing.Point(15, 27);
             this.butStart.Name = "butStart";
             this.butStart.Size = new System.Drawing.Size(92, 23);
             this.butStart.TabIndex = 0;
@@ -199,7 +224,7 @@ namespace Hodor
             this.gb2.Controls.Add(this.lbdisk);
             this.gb2.Controls.Add(this.lbip);
             this.gb2.Controls.Add(this.cbIP);
-            this.gb2.Location = new System.Drawing.Point(8, 289);
+            this.gb2.Location = new System.Drawing.Point(8, 330);
             this.gb2.Name = "gb2";
             this.gb2.Size = new System.Drawing.Size(247, 208);
             this.gb2.TabIndex = 2;
@@ -223,6 +248,7 @@ namespace Hodor
             this.txClientPass.PasswordChar = '*';
             this.txClientPass.Size = new System.Drawing.Size(124, 23);
             this.txClientPass.TabIndex = 6;
+            this.txClientPass.UseSystemPasswordChar = true;
             // 
             // butCon
             // 
@@ -279,7 +305,7 @@ namespace Hodor
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(8, 512);
+            this.linkLabel1.Location = new System.Drawing.Point(8, 545);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(64, 17);
             this.linkLabel1.TabIndex = 3;
@@ -291,7 +317,7 @@ namespace Hodor
             // 
             this.bottomStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatus});
-            this.bottomStatus.Location = new System.Drawing.Point(0, 541);
+            this.bottomStatus.Location = new System.Drawing.Point(0, 570);
             this.bottomStatus.Name = "bottomStatus";
             this.bottomStatus.Size = new System.Drawing.Size(258, 22);
             this.bottomStatus.TabIndex = 4;
@@ -306,7 +332,7 @@ namespace Hodor
             // GBIP
             // 
             this.GBIP.Controls.Add(this.cbIpList);
-            this.GBIP.Location = new System.Drawing.Point(8, 209);
+            this.GBIP.Location = new System.Drawing.Point(8, 251);
             this.GBIP.Name = "GBIP";
             this.GBIP.Size = new System.Drawing.Size(247, 74);
             this.GBIP.TabIndex = 5;
@@ -327,7 +353,7 @@ namespace Hodor
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(258, 563);
+            this.ClientSize = new System.Drawing.Size(258, 592);
             this.Controls.Add(this.GBIP);
             this.Controls.Add(this.bottomStatus);
             this.Controls.Add(this.linkLabel1);
@@ -386,6 +412,9 @@ namespace Hodor
         private System.Windows.Forms.CheckBox cbServer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txClientPass;
+        private System.Windows.Forms.Button browseDir;
+        private System.Windows.Forms.TextBox dirPathBox;
+        private System.Windows.Forms.FolderBrowserDialog folderDialog;
     }
 }
 

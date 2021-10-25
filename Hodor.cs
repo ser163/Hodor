@@ -14,7 +14,7 @@ namespace Hodor
         private Process exep = new();
         private readonly string  DavFile = @"webDav_go.exe";
 
-        public void Run()
+        public void Run(string SharePath)
         {
             // 检查webDav.exe文件是否存在
             if (!File.Exists(DavFile))
@@ -28,13 +28,22 @@ namespace Hodor
                 MessageBox.Show("webDav_go已经运行,请先停止再启动");
                 Environment.Exit(0);
             }
-            exep.StartInfo.Arguments = "-port 5081";
+            exep.StartInfo.Arguments = " -p \""+SharePath+"\" -port 5081";
             exep.StartInfo.FileName = DavFile;
             exep.StartInfo.CreateNoWindow = true;
-            exep.Start();
+            try
+            {
+              exep.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+           
         }
 
-        public void Run(string pass)
+        public void Run(string SharePath,string pass)
         {
             // 检查webDav.exe文件是否存在
             if (!File.Exists(DavFile))
@@ -48,10 +57,18 @@ namespace Hodor
                 MessageBox.Show("webDav_go已经运行,请先停止再启动");
                 Environment.Exit(0);
             }
-            exep.StartInfo.Arguments = "-port 5081 -user \"admin\" -pass \""+pass+"\"";
+            exep.StartInfo.Arguments = " -p \"" + SharePath + "\" -port 5081 -user \"admin\" -pass \"" + pass+"\"";
             exep.StartInfo.FileName = DavFile;
             exep.StartInfo.CreateNoWindow = true;
-            exep.Start();
+            try
+            {
+                exep.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void Stop()

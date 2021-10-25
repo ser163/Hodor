@@ -17,6 +17,8 @@ namespace Hodor
     public partial class mainWin : Form
     {
         private Hodoor hodoor = new();
+        private string SharePath = "";
+
         public mainWin()
         {
             InitializeComponent();
@@ -43,7 +45,7 @@ namespace Hodor
             }
             var count = cbIpList.Items.Count;
             cbIpList.SelectedIndex = count == 0 ? 0 : count - 1;
-            
+
             // 判断注册表
             Regedit Reg = new();
             Reg.CheckReg();
@@ -98,8 +100,38 @@ namespace Hodor
             pbStatusBox.Image = Properties.Resources.start_64;
         }
 
+        private bool FolderEXists(string Path)
+        {
+            // 判断是否选中文件夹
+            if (Path == "")
+            {
+                MessageBox.Show("请先选中要共享的文件夹!");
+                SelectFolder();
+                return false;
+            }
+            // 判断文件夹是否存在
+            if (!Directory.Exists(Path))
+            {
+                MessageBox.Show("共享文件夹,不存在,请重新选择");
+                SelectFolder();
+                return false;
+            }
+
+            return true;
+        }
+
         private void GlobalStart()
         {
+            //this.SharePath = System.Text.RegularExpressions.Regex.Unescape(dirPathBox.Text);
+
+            @SharePath = dirPathBox.Text;
+
+            if (!FolderEXists(this.SharePath))
+            {
+                return;
+            }   
+            
+            // 判断密码是否选中
             if (cbServer.Checked)
             {
                 var PassWord = txServerPass.Text;
@@ -109,10 +141,11 @@ namespace Hodor
                     return;
                 }
 
-                hodoor.Run(PassWord);
-            } else
+                hodoor.Run(this.SharePath,PassWord);
+            }
+            else
             {
-                hodoor.Run();
+                hodoor.Run(this.SharePath);
             }
 
             // 改变按钮状态
@@ -138,15 +171,16 @@ namespace Hodor
 
         private void GlobalStop()
         {
-            
+
             try
             {
                 hodoor.Stop();
-            } catch(Exception Ex)
+            }
+            catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
             }
-           
+
             StopStateChange();
         }
 
@@ -178,8 +212,13 @@ namespace Hodor
             hodoor.Stop();
             pbStatusBox.Image = Properties.Resources.stop_64;
             System.Threading.Thread.Sleep(1000);
+            if (!FolderEXists(this.SharePath))
+            {
+                return;
+            }
+
             pbStatusBox.Image = Properties.Resources.start_64;
-            hodoor.Run();
+            hodoor.Run(this.SharePath);
         }
 
         private void butCon_Click(object sender, EventArgs e)
@@ -198,11 +237,12 @@ namespace Hodor
             if (pass == "")
             {
                 ret = cmd(ip, disk);
-            } else
-            {
-                ret = cmd(ip, disk,pass);
             }
-            
+            else
+            {
+                ret = cmd(ip, disk, pass);
+            }
+
 
             if (ret)
             {
@@ -240,7 +280,7 @@ namespace Hodor
                 {
 
                     process.StartInfo.FileName = "net";
-                    var cmdline = "use " + disk + " http://" + IPstr + ":5081/ 123  /user:admin /persistent:YES";
+                    var cmdline = "use " + disk + " http://" + IPstr + ":5081/ /persistent:YES";
 
                     process.StartInfo.Arguments = cmdline;
                     // process.StartInfo.Verb = "Runas";
@@ -272,20 +312,21 @@ namespace Hodor
 
                     return true;
                 }
-            } catch(Exception)
+            }
+            catch (Exception)
             {
                 return false;
             }
         }
 
-        private bool cmd(string IPstr, string disk,string pass)
+        private bool cmd(string IPstr, string disk, string pass)
         {
             try
             {
                 using (var process = new Process())
                 {
                     process.StartInfo.FileName = "net";
-                    var cmdline = "use " + disk + " http://" + IPstr + ":5081/ "+pass+"  /user:admin /persistent:YES";
+                    var cmdline = "use " + disk + " http://" + IPstr + ":5081/ " + pass + "  /user:admin /persistent:YES";
 
                     process.StartInfo.Arguments = cmdline;
                     process.StartInfo.UseShellExecute = false;
@@ -347,7 +388,7 @@ namespace Hodor
 
         private void mainWin_FormClosing(object sender, FormClosingEventArgs e)
         {
-           if (hodoor.IsRunDav())
+            if (hodoor.IsRunDav())
             {
                 DialogResult ret = MessageBox.Show("是否退出服务", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (DialogResult.OK == ret)
@@ -355,6 +396,24 @@ namespace Hodor
                     hodoor.KillDav();
                 }
             }
+        }
+
+        private void browseDir_Click(object sender, EventArgs e)
+        {
+            SelectFolder();
+        }
+
+        private void SelectFolder()
+        {
+            if (folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                dirPathBox.Text = folderDialog.SelectedPath;
+            }
+        }
+
+        private void dirPathBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
