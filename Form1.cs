@@ -93,12 +93,13 @@ namespace Hodor
             startServer.Enabled = false;
             stopServer.Enabled = true;
             reSever.Enabled = true;
+
+            // 切换启动图片
+            pbStatusBox.Image = Properties.Resources.start_64;
         }
 
         private void GlobalStart()
         {
-            // 切换启动图片
-            pbStatusBox.Image = Properties.Resources.start_64;
             if (cbServer.Checked)
             {
                 var PassWord = txServerPass.Text;
@@ -132,11 +133,12 @@ namespace Hodor
             startServer.Enabled = true;
             stopServer.Enabled = false;
             reSever.Enabled = false;
+            pbStatusBox.Image = Properties.Resources.stop_64;
         }
 
         private void GlobalStop()
         {
-            pbStatusBox.Image = Properties.Resources.stop_64;
+            
             try
             {
                 hodoor.Stop();
