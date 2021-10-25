@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace Hodor
 {
     /// <summary>
-    /// 映射网络磁盘.易学网 www.vjsdn.com
+    /// 映射网络磁盘
     /// </summary>
     public class NetwareDriveAPI
     {

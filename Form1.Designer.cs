@@ -38,11 +38,15 @@ namespace Hodor
             this.reSever = new System.Windows.Forms.ToolStripMenuItem();
             this.toolExit = new System.Windows.Forms.ToolStripMenuItem();
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.txServerPass = new System.Windows.Forms.TextBox();
+            this.cbServer = new System.Windows.Forms.CheckBox();
             this.pbStatusBox = new System.Windows.Forms.PictureBox();
             this.butStop = new System.Windows.Forms.Button();
             this.butReStart = new System.Windows.Forms.Button();
             this.butStart = new System.Windows.Forms.Button();
             this.gb2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txClientPass = new System.Windows.Forms.TextBox();
             this.butCon = new System.Windows.Forms.Button();
             this.cbDisk = new System.Windows.Forms.ComboBox();
             this.lbdisk = new System.Windows.Forms.Label();
@@ -113,23 +117,43 @@ namespace Hodor
             // 
             // gb1
             // 
+            this.gb1.Controls.Add(this.txServerPass);
+            this.gb1.Controls.Add(this.cbServer);
             this.gb1.Controls.Add(this.pbStatusBox);
             this.gb1.Controls.Add(this.butStop);
             this.gb1.Controls.Add(this.butReStart);
             this.gb1.Controls.Add(this.butStart);
-            this.gb1.Location = new System.Drawing.Point(8, 15);
+            this.gb1.Location = new System.Drawing.Point(8, 12);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(247, 157);
+            this.gb1.Size = new System.Drawing.Size(247, 190);
             this.gb1.TabIndex = 1;
             this.gb1.TabStop = false;
             this.gb1.Text = "本机共享";
             this.gb1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // txServerPass
+            // 
+            this.txServerPass.Location = new System.Drawing.Point(129, 158);
+            this.txServerPass.Name = "txServerPass";
+            this.txServerPass.PasswordChar = '*';
+            this.txServerPass.Size = new System.Drawing.Size(105, 23);
+            this.txServerPass.TabIndex = 5;
+            // 
+            // cbServer
+            // 
+            this.cbServer.AutoSize = true;
+            this.cbServer.Location = new System.Drawing.Point(15, 158);
+            this.cbServer.Name = "cbServer";
+            this.cbServer.Size = new System.Drawing.Size(99, 21);
+            this.cbServer.TabIndex = 4;
+            this.cbServer.Text = "设置共享密码";
+            this.cbServer.UseVisualStyleBackColor = true;
+            // 
             // pbStatusBox
             // 
             this.pbStatusBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbStatusBox.Image = global::Hodor.Properties.Resources.stop_64;
-            this.pbStatusBox.Location = new System.Drawing.Point(133, 37);
+            this.pbStatusBox.Location = new System.Drawing.Point(129, 37);
             this.pbStatusBox.Name = "pbStatusBox";
             this.pbStatusBox.Size = new System.Drawing.Size(105, 105);
             this.pbStatusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -138,7 +162,7 @@ namespace Hodor
             // 
             // butStop
             // 
-            this.butStop.Location = new System.Drawing.Point(19, 119);
+            this.butStop.Location = new System.Drawing.Point(15, 119);
             this.butStop.Name = "butStop";
             this.butStop.Size = new System.Drawing.Size(92, 23);
             this.butStop.TabIndex = 2;
@@ -148,7 +172,7 @@ namespace Hodor
             // 
             // butReStart
             // 
-            this.butReStart.Location = new System.Drawing.Point(19, 77);
+            this.butReStart.Location = new System.Drawing.Point(15, 77);
             this.butReStart.Name = "butReStart";
             this.butReStart.Size = new System.Drawing.Size(92, 23);
             this.butReStart.TabIndex = 1;
@@ -158,7 +182,7 @@ namespace Hodor
             // 
             // butStart
             // 
-            this.butStart.Location = new System.Drawing.Point(19, 37);
+            this.butStart.Location = new System.Drawing.Point(15, 37);
             this.butStart.Name = "butStart";
             this.butStart.Size = new System.Drawing.Size(92, 23);
             this.butStart.TabIndex = 0;
@@ -168,22 +192,41 @@ namespace Hodor
             // 
             // gb2
             // 
+            this.gb2.Controls.Add(this.label1);
+            this.gb2.Controls.Add(this.txClientPass);
             this.gb2.Controls.Add(this.butCon);
             this.gb2.Controls.Add(this.cbDisk);
             this.gb2.Controls.Add(this.lbdisk);
             this.gb2.Controls.Add(this.lbip);
             this.gb2.Controls.Add(this.cbIP);
-            this.gb2.Location = new System.Drawing.Point(8, 272);
+            this.gb2.Location = new System.Drawing.Point(8, 289);
             this.gb2.Name = "gb2";
-            this.gb2.Size = new System.Drawing.Size(247, 194);
+            this.gb2.Size = new System.Drawing.Size(247, 208);
             this.gb2.TabIndex = 2;
             this.gb2.TabStop = false;
             this.gb2.Text = "连接共享";
             this.gb2.Enter += new System.EventHandler(this.gb2_Enter);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(106, 83);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 17);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "密码:";
+            // 
+            // txClientPass
+            // 
+            this.txClientPass.Location = new System.Drawing.Point(106, 106);
+            this.txClientPass.Name = "txClientPass";
+            this.txClientPass.PasswordChar = '*';
+            this.txClientPass.Size = new System.Drawing.Size(124, 23);
+            this.txClientPass.TabIndex = 6;
+            // 
             // butCon
             // 
-            this.butCon.Location = new System.Drawing.Point(19, 142);
+            this.butCon.Location = new System.Drawing.Point(15, 152);
             this.butCon.Name = "butCon";
             this.butCon.Size = new System.Drawing.Size(215, 37);
             this.butCon.TabIndex = 4;
@@ -201,7 +244,7 @@ namespace Hodor
             "X:",
             "Y:",
             "Z:"});
-            this.cbDisk.Location = new System.Drawing.Point(116, 96);
+            this.cbDisk.Location = new System.Drawing.Point(15, 105);
             this.cbDisk.Name = "cbDisk";
             this.cbDisk.Size = new System.Drawing.Size(52, 25);
             this.cbDisk.TabIndex = 3;
@@ -210,7 +253,7 @@ namespace Hodor
             // lbdisk
             // 
             this.lbdisk.AutoSize = true;
-            this.lbdisk.Location = new System.Drawing.Point(19, 96);
+            this.lbdisk.Location = new System.Drawing.Point(15, 83);
             this.lbdisk.Name = "lbdisk";
             this.lbdisk.Size = new System.Drawing.Size(59, 17);
             this.lbdisk.TabIndex = 2;
@@ -219,7 +262,7 @@ namespace Hodor
             // lbip
             // 
             this.lbip.AutoSize = true;
-            this.lbip.Location = new System.Drawing.Point(19, 28);
+            this.lbip.Location = new System.Drawing.Point(15, 31);
             this.lbip.Name = "lbip";
             this.lbip.Size = new System.Drawing.Size(46, 17);
             this.lbip.TabIndex = 1;
@@ -228,7 +271,7 @@ namespace Hodor
             // cbIP
             // 
             this.cbIP.FormattingEnabled = true;
-            this.cbIP.Location = new System.Drawing.Point(19, 50);
+            this.cbIP.Location = new System.Drawing.Point(15, 53);
             this.cbIP.Name = "cbIP";
             this.cbIP.Size = new System.Drawing.Size(215, 25);
             this.cbIP.TabIndex = 0;
@@ -236,7 +279,7 @@ namespace Hodor
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(8, 481);
+            this.linkLabel1.Location = new System.Drawing.Point(8, 512);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(64, 17);
             this.linkLabel1.TabIndex = 3;
@@ -248,9 +291,9 @@ namespace Hodor
             // 
             this.bottomStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatus});
-            this.bottomStatus.Location = new System.Drawing.Point(0, 515);
+            this.bottomStatus.Location = new System.Drawing.Point(0, 541);
             this.bottomStatus.Name = "bottomStatus";
-            this.bottomStatus.Size = new System.Drawing.Size(260, 22);
+            this.bottomStatus.Size = new System.Drawing.Size(258, 22);
             this.bottomStatus.TabIndex = 4;
             this.bottomStatus.Text = "statusStrip1";
             // 
@@ -263,7 +306,7 @@ namespace Hodor
             // GBIP
             // 
             this.GBIP.Controls.Add(this.cbIpList);
-            this.GBIP.Location = new System.Drawing.Point(8, 179);
+            this.GBIP.Location = new System.Drawing.Point(8, 209);
             this.GBIP.Name = "GBIP";
             this.GBIP.Size = new System.Drawing.Size(247, 74);
             this.GBIP.TabIndex = 5;
@@ -273,7 +316,7 @@ namespace Hodor
             // cbIpList
             // 
             this.cbIpList.FormattingEnabled = true;
-            this.cbIpList.Location = new System.Drawing.Point(19, 32);
+            this.cbIpList.Location = new System.Drawing.Point(15, 32);
             this.cbIpList.Name = "cbIpList";
             this.cbIpList.Size = new System.Drawing.Size(219, 25);
             this.cbIpList.TabIndex = 0;
@@ -284,7 +327,7 @@ namespace Hodor
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(260, 537);
+            this.ClientSize = new System.Drawing.Size(258, 563);
             this.Controls.Add(this.GBIP);
             this.Controls.Add(this.bottomStatus);
             this.Controls.Add(this.linkLabel1);
@@ -302,6 +345,7 @@ namespace Hodor
             this.SizeChanged += new System.EventHandler(this.mainWin_SizeChanged);
             this.cxMenuStrip.ResumeLayout(false);
             this.gb1.ResumeLayout(false);
+            this.gb1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbStatusBox)).EndInit();
             this.gb2.ResumeLayout(false);
             this.gb2.PerformLayout();
@@ -338,6 +382,10 @@ namespace Hodor
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatus;
         private System.Windows.Forms.GroupBox GBIP;
         private System.Windows.Forms.ComboBox cbIpList;
+        private System.Windows.Forms.TextBox txServerPass;
+        private System.Windows.Forms.CheckBox cbServer;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txClientPass;
     }
 }
 

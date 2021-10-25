@@ -99,7 +99,21 @@ namespace Hodor
         {
             // 切换启动图片
             pbStatusBox.Image = Properties.Resources.start_64;
-            hodoor.Run();
+            if (cbServer.Checked)
+            {
+                var PassWord = txServerPass.Text;
+                if (PassWord == "")
+                {
+                    MessageBox.Show("请填写密码");
+                    return;
+                }
+
+                hodoor.Run(PassWord);
+            } else
+            {
+                hodoor.Run();
+            }
+
             // 改变按钮状态
             RunStateChange();
         }
@@ -170,13 +184,24 @@ namespace Hodor
         {
             var ip = cbIP.Text;
             var disk = cbDisk.Text;
+            var pass = txClientPass.Text;
             if (GOT.DriverExists(disk))
             {
                 MessageBox.Show("盘符已存在,请选用其它盘");
                 return;
             }
 
-            var ret = cmd(ip, disk);
+            bool ret = false;
+
+            if (pass == "")
+            {
+                ret = cmd(ip, disk);
+            } else
+            {
+                ret = cmd(ip, disk,pass);
+            }
+            
+
             if (ret)
             {
                 // 如果返回成功则打开 盘符
@@ -246,6 +271,31 @@ namespace Hodor
                     return true;
                 }
             } catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool cmd(string IPstr, string disk,string pass)
+        {
+            try
+            {
+                using (var process = new Process())
+                {
+                    process.StartInfo.FileName = "net";
+                    var cmdline = "use " + disk + " http://" + IPstr + ":5081/ "+pass+"  /user:admin /persistent:YES";
+
+                    process.StartInfo.Arguments = cmdline;
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.RedirectStandardInput = true;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.RedirectStandardError = true;
+                    process.StartInfo.CreateNoWindow = false;
+                    process.Start();
+                    return true;
+                }
+            }
+            catch (Exception)
             {
                 return false;
             }

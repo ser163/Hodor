@@ -34,6 +34,26 @@ namespace Hodor
             exep.Start();
         }
 
+        public void Run(string pass)
+        {
+            // 检查webDav.exe文件是否存在
+            if (!File.Exists(DavFile))
+            {
+                MessageBox.Show("webDav_go.exe 程序找不到");
+                Environment.Exit(0);
+            }
+            //判断是否已经运行
+            if (IsRunDav())
+            {
+                MessageBox.Show("webDav_go已经运行,请先停止再启动");
+                Environment.Exit(0);
+            }
+            exep.StartInfo.Arguments = "-port 5081 -user \"admin\" -pass \""+pass+"\"";
+            exep.StartInfo.FileName = DavFile;
+            exep.StartInfo.CreateNoWindow = true;
+            exep.Start();
+        }
+
         public void Stop()
         {
             try
