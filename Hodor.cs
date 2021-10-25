@@ -55,5 +55,24 @@ namespace Hodor
             }
             return false;
         }
+
+        public bool KillDav()
+        {
+            try
+            {
+                var DavList = System.Diagnostics.Process.GetProcessesByName("webDav_go");
+
+                for (int i = 0; i < DavList.Length; i++)
+                {
+                    DavList[i].Kill();//结束进程
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -5,7 +5,7 @@
 !define PRODUCT_VERSION "1.0"
 !define PRODUCT_PUBLISHER "Sun co, Inc."
 !define PRODUCT_WEB_SITE "http://www.ser163.cn"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\webDav_go.exe"
+!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\Hodor.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
 
@@ -25,7 +25,7 @@
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
-!insertmacro MUI_PAGE_LICENSE "C:\Users\Administrator\Desktop\MIT License.txt"
+!insertmacro MUI_PAGE_LICENSE "LICENSE"
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
 ; Instfiles page
