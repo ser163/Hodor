@@ -9,7 +9,6 @@ namespace Hodor
 {
     class FireWalld
     {
-
         public static bool AddRuls(string Path)
         {
             try
@@ -28,7 +27,7 @@ namespace Hodor
             catch (Exception)
             {
                 return false;
-            } 
+            }
 
         }
     }

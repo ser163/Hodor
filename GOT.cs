@@ -11,10 +11,8 @@ using System.Collections;
 
 namespace Hodor
 {
-
     static class GOT
     {
-
         // 获取本机所有ip
         public static List<string> GetAllIP()
         {
@@ -31,6 +29,17 @@ namespace Hodor
 
             }
             return IPList;
+        }
+
+        public static void OpenFolder(string DiskLabel)
+        {
+            //open folder
+            Process.Start("Explorer.exe", DiskLabel);
+        }
+
+        public static bool DriverExists(string DriverName)
+        {
+            return System.IO.Directory.GetLogicalDrives().Contains(DriverName);
         }
     }
 

@@ -170,7 +170,19 @@ namespace Hodor
         {
             var ip = cbIP.Text;
             var disk = cbDisk.Text;
-            string ret = cmd(ip, disk);
+            if (GOT.DriverExists(disk))
+            {
+                MessageBox.Show("盘符已存在,请选用其它盘");
+                return;
+            }
+
+            var ret = cmd(ip, disk);
+            if (ret)
+            {
+                // 如果返回成功则打开 盘符
+                GOT.OpenFolder(disk);
+            }
+
             //var path = @"http://127.0.0.1:5081/";
             //var status = NetwareDriveAPI.Connect(path, disk, "admin", "123");
 
@@ -193,43 +205,49 @@ namespace Hodor
             //}
         }
 
-        private string cmd(string IPstr, string disk)
+        private bool cmd(string IPstr, string disk)
         {
-            using (var process = new Process())
+            try
             {
-               
-                process.StartInfo.FileName = "net";
-                var cmdline = "use " + disk + " http://" + IPstr + ":5081/ 123  /user:admin /persistent:YES";
+                using (var process = new Process())
+                {
 
-                process.StartInfo.Arguments = cmdline;
-                // process.StartInfo.Verb = "Runas";
-                //process.StartInfo.UserName = "administrator";
-               
-                //var strPWD = "1076";
-                //System.Security.SecureString password = new System.Security.SecureString();   //SecureString，安全字符，必须是char类型
-                //foreach (char c in strPWD.ToCharArray())
-                //{
-                //    password.AppendChar(c);
-                //}
-                //process.StartInfo.Password = password;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardInput = true;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.CreateNoWindow = false;
+                    process.StartInfo.FileName = "net";
+                    var cmdline = "use " + disk + " http://" + IPstr + ":5081/ 123  /user:admin /persistent:YES";
 
-                process.Start();
-                // process.StandardInput.AutoFlush = true;
+                    process.StartInfo.Arguments = cmdline;
+                    // process.StartInfo.Verb = "Runas";
+                    //process.StartInfo.UserName = "administrator";
 
-                //process.StandardInput.WriteLine(cmdline + "&exit");
+                    //var strPWD = "1076";
+                    //System.Security.SecureString password = new System.Security.SecureString();   //SecureString，安全字符，必须是char类型
+                    //foreach (char c in strPWD.ToCharArray())
+                    //{
+                    //    password.AppendChar(c);
+                    //}
+                    //process.StartInfo.Password = password;
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.RedirectStandardInput = true;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.RedirectStandardError = true;
+                    process.StartInfo.CreateNoWindow = false;
 
-                //获取cmd窗口的输出信息  
-                //string output = process.StandardOutput.ReadToEnd();
+                    process.Start();
+                    // process.StandardInput.AutoFlush = true;
 
-                //process.WaitForExit();
-                //process.Close();
+                    //process.StandardInput.WriteLine(cmdline + "&exit");
 
-                return "";
+                    //获取cmd窗口的输出信息  
+                    //string output = process.StandardOutput.ReadToEnd();
+
+                    //process.WaitForExit();
+                    //process.Close();
+
+                    return true;
+                }
+            } catch(Exception)
+            {
+                return false;
             }
         }
 
