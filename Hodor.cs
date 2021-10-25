@@ -39,14 +39,18 @@ namespace Hodor
             try
             {
                 exep.Kill();
-            } catch(Exception ex)
+            } catch(InvalidOperationException ex)
+            {
+                KillDav();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
         }
 
-        private bool IsRunDav()
+        public bool IsRunDav()
         {
             var Count = System.Diagnostics.Process.GetProcessesByName("webDav_go").ToList().Count;
             if (Count > 0)

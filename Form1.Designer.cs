@@ -257,8 +257,8 @@ namespace Hodor
             // toolStripStatus
             // 
             this.toolStripStatus.Name = "toolStripStatus";
-            this.toolStripStatus.Size = new System.Drawing.Size(131, 17);
-            this.toolStripStatus.Text = "toolStripStatusLabel1";
+            this.toolStripStatus.Size = new System.Drawing.Size(104, 17);
+            this.toolStripStatus.Text = "Hold the door ...";
             // 
             // GBIP
             // 
@@ -290,12 +290,14 @@ namespace Hodor
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.gb2);
             this.Controls.Add(this.gb1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "mainWin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hodor";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainWin_FormClosing);
             this.Load += new System.EventHandler(this.mainWin_Load);
             this.SizeChanged += new System.EventHandler(this.mainWin_SizeChanged);
             this.cxMenuStrip.ResumeLayout(false);

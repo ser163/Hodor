@@ -24,9 +24,15 @@ namespace Hodor
 
         private void mainWin_Load(object sender, EventArgs e)
         {
-            butStop.Enabled = false;
-            butReStart.Enabled = false;
-            stopServer.Enabled = false;
+            if (hodoor.IsRunDav())
+            {
+                RunStateChange();
+            }
+            else
+            {
+                StopStateChange();
+            }
+
             reSever.Enabled = false;
             cbDisk.SelectedIndex = 0;
 
@@ -117,7 +123,14 @@ namespace Hodor
         private void GlobalStop()
         {
             pbStatusBox.Image = Properties.Resources.stop_64;
-            hodoor.Stop();
+            try
+            {
+                hodoor.Stop();
+            } catch(Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
+           
             StopStateChange();
         }
 
@@ -125,7 +138,6 @@ namespace Hodor
         {
             GlobalStop();
         }
-
 
         // 重启状态改变
         private void ReStartStateChange()
@@ -138,7 +150,6 @@ namespace Hodor
             stopServer.Enabled = true;
             reSever.Enabled = true;
         }
-
 
         private void butReStart_Click(object sender, EventArgs e)
         {
@@ -262,6 +273,18 @@ namespace Hodor
         private void cbIpList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void mainWin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           if (hodoor.IsRunDav())
+            {
+                DialogResult ret = MessageBox.Show("是否退出服务", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (DialogResult.OK == ret)
+                {
+                    hodoor.KillDav();
+                }
+            }
         }
     }
 }
